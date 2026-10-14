@@ -43,7 +43,7 @@ Participants are split into two halves. The correlation of the two per-image mea
 
 Column names can be set with `--id-column`, `--target-column`, `--participant-column`, `--image-column`, and `--rating-column`.
 
-[OpenReview](https://openreview.net/forum?id=XB3iY2q9Vb)
+[Paper](https://openreview.net/pdf?id=XB3iY2q9Vb)
 
 ## Citation
 
@@ -53,7 +53,7 @@ Column names can be set with `--id-column`, `--target-column`, `--participant-co
   author={Mahdiani, Morteza and Landry, Catherine and van den Bosch, Jasper JF and Gosselin, Fr{\'e}d{\'e}ric and Charest, Ian},
   booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
   year={2026},
-  url={https://openreview.net/forum?id=XB3iY2q9Vb}
+  url={https://openreview.net/pdf?id=XB3iY2q9Vb}
 }
 ```
 
