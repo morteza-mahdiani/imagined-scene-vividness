@@ -24,6 +24,7 @@ from vividness.stats import (
     r_squared,
     shared_component,
     split_half_ceiling,
+    zscore_trials,
 )
 
 
@@ -50,6 +51,8 @@ def _align_controls(image_ids, control_ids, features, category):
 
 def command_target(args: argparse.Namespace) -> None:
     frame = read_trials(args.trials, args.participant_column, args.image_column, args.rating_column)
+    if args.zscore:
+        frame = zscore_trials(frame)
     target = image_target(frame)
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -175,6 +178,8 @@ def command_bootstrap(args: argparse.Namespace) -> None:
 
 def command_ceiling(args: argparse.Namespace) -> None:
     frame = read_trials(args.trials, args.participant_column, args.image_column, args.rating_column)
+    if args.zscore:
+        frame = zscore_trials(frame)
     payload = split_half_ceiling(frame, args.n_splits, args.seed)
     payload["seed"] = int(args.seed)
     _write(Path(args.out), payload)
@@ -249,6 +254,7 @@ def _trials(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--participant-column", default="participant")
     parser.add_argument("--image-column", default="image")
     parser.add_argument("--rating-column", default="rating")
+    parser.add_argument("--zscore", action="store_true")
 
 
 def main() -> None:

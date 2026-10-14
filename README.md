@@ -1,12 +1,18 @@
+<h1 align="center">Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models</h1>
+
+<p align="center">
+Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin, and Ian Charest
+</p>
+
+<p align="center">
+  <a href="https://openreview.net/pdf?id=XB3iY2q9Vb"><img alt="Paper" src="https://img.shields.io/badge/Paper-OpenReview-b31b1b?logo=adobeacrobatreader&logoColor=white"></a>
+  <a href="https://openreview.net/pdf?id=XB3iY2q9Vb"><img alt="NeurIPS 2026 Spotlight" src="https://img.shields.io/badge/NeurIPS-2026_Spotlight-blue"></a>
+  <a href="https://github.com/morteza-mahdiani/imagined-scene-vividness"><img alt="Code" src="https://img.shields.io/badge/Code-GitHub-181717?logo=github&logoColor=white"></a>
+</p>
+
 <p align="center">
   <img src="video/spotlight.gif" width="720" alt="Modeling the Vividness of Imagined Natural Scenes">
 </p>
-
-# Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models
-
-**NeurIPS 2026 Spotlight**
-
-Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin, and Ian Charest
 
 The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. Frozen encoders with a lightweight probe predict the image-level target. The leading component of those predictions is the model-common signal. This repository recomputes that result from the study tables: the shared component, the model correlations, the split-half bound, and the variance each model adds over control features.
 
@@ -20,7 +26,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Trials are one rating per row. The default columns are `participant`, `image`, and `rating`. The image-level target is the mean of ratings after they are z-scored within participant.
+Trials are one rating per row. The default columns are `participant`, `image`, and `rating`. The rating column is the within-participant z-scored rating, and the image-level target is its mean within each image. `--zscore` standardizes raw ratings within participant before that average.
 
 ```bash
 python -m vividness target --trials trials.csv --out results/target.csv
@@ -38,7 +44,7 @@ python -m vividness bootstrap --predictions predictions.csv --out results/bootst
 python -m vividness ceiling --trials trials.csv --out results/ceiling.json
 ```
 
-`component` writes the variance explained by each component, the correlation of each component with the target, the model loadings, and the mean and median correlation among predictions before and after the target is linearly removed. The sign of the first component is chosen so that its correlation with the target is positive. It also writes how much variance each model adds beyond that component. `bootstrap` resamples images with replacement, using the same images for every model, and writes Pearson *r* and Spearman *ρ* with a 95% interval, plus the paired difference in Pearson *r*. `ceiling` splits participants into two halves, correlates the two per-image means, and projects that correlation to the full sample with the Spearman–Brown formula. The square root of the projected value is the bound on the correlation an image-level prediction can reach.
+`component` writes the variance explained by each component, the correlation of each component with the target, the model loadings, and the mean and median correlation among predictions before and after the target is linearly removed. The sign of the first component is chosen so that its correlation with the target is positive. It also writes how much variance each model adds beyond that component. `bootstrap` resamples images with replacement, using the same images for every model, and writes Pearson *r* and Spearman *ρ* with a 95% interval, plus the paired difference in Pearson *r*. `ceiling` splits participants into two halves, correlates the two per-image means, and projects that correlation to the full sample with the Spearman–Brown formula. The interval is the 5th to 95th percentile across splits. The square root of the projected value is the bound on the correlation an image-level prediction can reach.
 
 Control features are a second table with the same image id and one column per feature. An optional category column adds the within-category correlation and the correlation after category means are removed.
 
@@ -70,4 +76,4 @@ The defaults are 10,000 resamples for the correlations, 1,000 for the other inte
 }
 ```
 
-`CITATION.cff` carries the same record. The analysis code is by Morteza Mahdiani.
+`CITATION.cff` carries the same record. The analysis code is by Morteza Mahdiani (m72.morteza@gmail.com).

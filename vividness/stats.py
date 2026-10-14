@@ -87,9 +87,11 @@ def zscore_trials(frame):
 
 
 def image_target(frame):
-    """Mean of within-participant z-scored ratings, one value per image."""
-    scored = zscore_trials(frame)
-    return scored.groupby("image", sort=False)["rating"].mean()
+    """Mean rating of each image.
+
+    The rating column is the within-participant z-scored rating.
+    """
+    return frame.groupby("image", sort=False)["rating"].mean()
 
 
 def shared_component(predictions: np.ndarray, target: np.ndarray) -> dict:
@@ -207,23 +209,25 @@ def bootstrap_agreement(
 def split_half_ceiling(frame, n_splits: int, seed: int) -> dict:
     """Split-half reliability of the image-level target.
 
-    Ratings are z-scored within participant. Participants are then divided
-    into two halves, and each half contributes a per-image mean. The
-    correlation of those means is projected to the full sample by the
-    Spearman–Brown formula 2r / (1 + r). Its square root bounds the
-    correlation an image-level prediction can reach.
+    The rating column is the within-participant z-scored rating.
+    Participants are divided into two halves, and each half contributes a
+    per-image mean. The correlation of those means is projected to the full
+    sample by the Spearman–Brown formula 2r / (1 + r). The square root of
+    that projection bounds the correlation an image-level prediction can reach.
+    The interval is the 5th to 95th percentile across splits.
     """
-    scored = zscore_trials(frame)
+    if frame["participant"].nunique() < 2:
+        raise ValueError("need at least two participants")
     rng = np.random.default_rng(seed)
-    participants = scored["participant"].unique()
+    participants = np.asarray(frame["participant"].unique())
     half_r = np.empty(n_splits, dtype=float)
     projected = np.empty(n_splits, dtype=float)
-    bound = np.empty(n_splits, dtype=float)
     for split in range(n_splits):
-        order = rng.permutation(participants)
+        order = participants.copy()
+        rng.shuffle(order)
         first = set(order[: len(order) // 2])
-        left = scored[scored["participant"].isin(first)]
-        right = scored[~scored["participant"].isin(first)]
+        left = frame[frame["participant"].isin(first)]
+        right = frame[~frame["participant"].isin(first)]
         left_mean = left.groupby("image")["rating"].mean()
         right_mean = right.groupby("image")["rating"].mean()
         shared = left_mean.index.intersection(right_mean.index)
@@ -233,15 +237,19 @@ def split_half_ceiling(frame, n_splits: int, seed: int) -> dict:
             raise ValueError("split-half correlation is undefined")
         half_r[split] = value
         projected[split] = full
-        bound[split] = float(np.sqrt(full))
+    reliability = _split_summary(projected)
     return {
-        "n_trials": int(len(scored)),
+        "n_trials": int(len(frame)),
         "n_participants": int(len(participants)),
-        "n_images": int(scored["image"].nunique()),
+        "n_images": int(frame["image"].nunique()),
         "n_splits": int(n_splits),
-        "split_half_r": _summary(half_r),
-        "spearman_brown": _summary(projected),
-        "correlation_bound": _summary(bound),
+        "split_half_r": _split_summary(half_r),
+        "spearman_brown": reliability,
+        "correlation_bound": {
+            "mean": float(np.sqrt(reliability["mean"])),
+            "p05": float(np.sqrt(reliability["p05"])),
+            "p95": float(np.sqrt(reliability["p95"])),
+        },
     }
 
 
@@ -303,9 +311,10 @@ def _optional_correlation(x: np.ndarray, y: np.ndarray):
     return correlation(x, y)
 
 
-def _summary(values: np.ndarray) -> dict:
+def _split_summary(values: np.ndarray) -> dict:
     return {
         "mean": float(values.mean()),
-        "sd": float(values.std(ddof=1)) if len(values) > 1 else 0.0,
-        "ci95": [float(np.percentile(values, 2.5)), float(np.percentile(values, 97.5))],
+        "sd": float(values.std(ddof=0)),
+        "p05": float(np.quantile(values, 0.05)),
+        "p95": float(np.quantile(values, 0.95)),
     }
