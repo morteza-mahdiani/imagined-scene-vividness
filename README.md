@@ -8,41 +8,42 @@
 
 Morteza Mahdiani, Catherine Landry, Ian Charest, Frédéric Gosselin, and Jasper JF van den Bosch
 
-People differ in how vividly they can imagine a natural scene. This paper measures that vividness for images from the Natural Scenes Dataset and asks how much of the image-level pattern is captured by current vision models. Frozen encoders, each with a lightweight probe, predict the per-image mean of within-participant z-scored ratings. Their predictions share one leading component. That component tracks the reliable image-level signal, and the models still agree with each other after the human target is removed.
+The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. Frozen encoders with a lightweight probe predict the image-level target. The leading component of those predictions is the model-common signal. This repository computes that component, the bootstrap intervals on the model–target correlations, and the participant split-half ceiling.
 
-The Spotlight clip is [`video/vividness_15s.mp4`](video/vividness_15s.mp4).
+[`video/vividness_15s.mp4`](video/vividness_15s.mp4)
 
-## Reproduce
+## Run
 
-Each model is a directory containing `test_predictions.txt` (`index`, `target`, `prediction`). Install the dependencies, then point the scripts at a directory of those runs:
+From the repository root:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
-python scripts/pca_residual_analysis.py --runs-dir RUNS --out-dir results/pca
-python scripts/bootstrap_significance.py --runs-dir RUNS --out-dir results/bootstrap
-python scripts/cross_model_agreement.py --runs-dir RUNS --out-dir results/agreement
-python scripts/aggregate_results.py --runs-dir RUNS
-python scripts/controls_regression.py --controls-npz CONTROLS.npz --runs-dir RUNS --out-dir results/controls
-python scripts/noise_ceiling.py --clean-csv TRIALS.csv --out results/noise_ceiling.json
-python scripts/strengthen_paper_analysis.py --runs-dir RUNS --noise-ceiling-json results/noise_ceiling.json --out-dir results/strengthen
 ```
 
-`predictions/synthetic` is a small simulated set in the same layout. It runs the shared-component and bootstrap scripts without the study files:
+Predictions are a CSV. `image_id` identifies the row, `target` is the image-level rating, and each remaining column is one model:
+
+```text
+image_id,target,model_a,model_b
+```
 
 ```bash
-python scripts/pca_residual_analysis.py \
-  --runs-dir predictions/synthetic --out-dir results/synthetic_pca \
-  --include model_ --n-boot 200
-
-python scripts/bootstrap_significance.py \
-  --runs-dir predictions/synthetic --out-dir results/synthetic_bootstrap \
-  --include model_ --n-boot 200
+python -m vividness component --predictions predictions.csv --out results/component
+python -m vividness bootstrap --predictions predictions.csv --out results/bootstrap
 ```
 
-The Natural Scenes Dataset images, participant ratings, and the paper's prediction tables are not in this repository. `TRIALS.csv` is the trial table (`participation`, `stim1_name`, `rating_zscore`, `include`). `CONTROLS.npz` is the interpretable image-control matrix. `RUNS` also supplies `test_metrics.json` for the summary table and the layer-wise probe outputs used by `strengthen_paper_analysis.py`.
+The first command writes the variance explained by each component, the correlation of the first component with the target, the model loadings, and the mean correlation among predictions before and after the target is linearly removed. The sign of the first component is chosen so that correlation is positive. The second command resamples images with replacement and reports a 95% interval for each correlation and for each paired difference.
+
+Trials are a CSV with one rating per row. The default columns are `participant`, `image`, and `rating`.
+
+```bash
+python -m vividness ceiling --trials trials.csv --out results/ceiling.json
+```
+
+Participants are split into two halves. The correlation of the two per-image means is projected to the full sample with the Spearman–Brown formula.
+
+Column names can be set with `--id-column`, `--target-column`, `--participant-column`, `--image-column`, and `--rating-column`.
 
 Paper PDF: `PLACEHOLDER_PDF_URL`
 OpenReview: `PLACEHOLDER_OPENREVIEW_URL`
@@ -60,4 +61,4 @@ DOI: `PLACEHOLDER_DOI`
 }
 ```
 
-`CITATION.cff` carries the same record. The analysis scripts are by Morteza Mahdiani.
+`CITATION.cff` carries the same record. The analysis code is by Morteza Mahdiani.
