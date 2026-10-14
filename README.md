@@ -1,5 +1,5 @@
 <p align="center">
-  <video src="https://github.com/morteza-mahdiani/imagined-scene-vividness/raw/main/video/vividness_15s.mp4" width="640" controls playsinline></video>
+  <img src="video/spotlight.gif" width="720" alt="Modeling the Vividness of Imagined Natural Scenes">
 </p>
 
 # Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models
@@ -9,8 +9,6 @@
 Morteza Mahdiani, Catherine Landry, Ian Charest, Frédéric Gosselin, and Jasper JF van den Bosch
 
 The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. Frozen encoders with a lightweight probe predict the image-level target. The leading component of those predictions is the model-common signal. This repository computes that component, the bootstrap intervals on the model–target correlations, and the participant split-half ceiling.
-
-[`video/vividness_15s.mp4`](video/vividness_15s.mp4)
 
 ## Run
 
