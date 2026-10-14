@@ -16,6 +16,7 @@ venv/
 *secret*
 *.key
 
+results/
 example/output/
 *.npy
 *.npz

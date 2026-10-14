@@ -1,6 +1,6 @@
 # synthetic example, not human data
 # columns: synthetic_idx target pred
-# generator: example/run_shared_component.py --write-synthetic --seed 0 --n-images 400
+# synthetic predictions for the shared-component script; not human ratings
 0 -0.11567993 -0.09510949
 1 0.24443659 0.05723386
 2 -0.35077547 0.63159607

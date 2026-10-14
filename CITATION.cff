@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this example, please cite the paper."
+message: "If you use this work, please cite the paper."
 type: software
 title: "imagined-scene-vividness"
 authors:
@@ -7,8 +7,9 @@ authors:
     given-names: Morteza
 repository-code: "https://github.com/morteza-mahdiani/imagined-scene-vividness"
 abstract: >-
-  Example analysis for the shared image-level component among vividness
-  predictions. This release does not reproduce the full paper.
+  Analysis code for the NeurIPS 2026 Spotlight paper Modeling the Vividness
+  of Imagined Natural Scenes Reveals a Model-Common Image-Level Component
+  in Vision Models.
 preferred-citation:
   type: conference-paper
   title: "Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models"
@@ -26,4 +27,4 @@ preferred-citation:
   year: 2026
   conference:
     name: "Neural Information Processing Systems"
-  notes: "NeurIPS 2026 Spotlight. Replace PLACEHOLDER_PDF_URL, PLACEHOLDER_OPENREVIEW_URL, and PLACEHOLDER_DOI when those identifiers exist. Proceedings volume and pages are not yet entered."
+  notes: "NeurIPS 2026 Spotlight. Replace PLACEHOLDER_PDF_URL, PLACEHOLDER_OPENREVIEW_URL, and PLACEHOLDER_DOI when those identifiers exist."
