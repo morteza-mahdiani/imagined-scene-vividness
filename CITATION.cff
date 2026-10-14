@@ -18,13 +18,13 @@ preferred-citation:
       given-names: Morteza
     - family-names: Landry
       given-names: Catherine
-    - family-names: Charest
-      given-names: Ian
-    - family-names: Gosselin
-      given-names: Frédéric
     - family-names: "van den Bosch"
       given-names: "Jasper JF"
+    - family-names: Gosselin
+      given-names: Frédéric
+    - family-names: Charest
+      given-names: Ian
   year: 2026
+  url: "https://openreview.net/forum?id=XB3iY2q9Vb"
   conference:
-    name: "Neural Information Processing Systems"
-  notes: "NeurIPS 2026 Spotlight. Replace PLACEHOLDER_PDF_URL, PLACEHOLDER_OPENREVIEW_URL, and PLACEHOLDER_DOI when those identifiers exist."
+    name: "The Fortieth Annual Conference on Neural Information Processing Systems"

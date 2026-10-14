@@ -6,7 +6,7 @@
 
 **NeurIPS 2026 Spotlight**
 
-Morteza Mahdiani, Catherine Landry, Ian Charest, Frédéric Gosselin, and Jasper JF van den Bosch
+Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin, and Ian Charest
 
 The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. Frozen encoders with a lightweight probe predict the image-level target. The leading component of those predictions is the model-common signal. This repository computes that component, the bootstrap intervals on the model–target correlations, and the participant split-half ceiling.
 
@@ -43,19 +43,17 @@ Participants are split into two halves. The correlation of the two per-image mea
 
 Column names can be set with `--id-column`, `--target-column`, `--participant-column`, `--image-column`, and `--rating-column`.
 
-Paper PDF: `PLACEHOLDER_PDF_URL`
-OpenReview: `PLACEHOLDER_OPENREVIEW_URL`
-DOI: `PLACEHOLDER_DOI`
+[OpenReview](https://openreview.net/forum?id=XB3iY2q9Vb)
 
 ## Citation
 
 ```bibtex
-@inproceedings{mahdiani2026imaginedvividness,
-  title     = {Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models},
-  author    = {Mahdiani, Morteza and Landry, Catherine and Charest, Ian and Gosselin, Fr{\'e}d{\'e}ric and van den Bosch, Jasper JF},
-  booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2026},
-  note      = {NeurIPS 2026 Spotlight. PDF: PLACEHOLDER_PDF_URL. OpenReview: PLACEHOLDER_OPENREVIEW_URL. DOI: PLACEHOLDER_DOI.}
+@inproceedings{mahdiani2026modeling,
+  title={Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models},
+  author={Mahdiani, Morteza and Landry, Catherine and van den Bosch, Jasper JF and Gosselin, Fr{\'e}d{\'e}ric and Charest, Ian},
+  booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
+  year={2026},
+  url={https://openreview.net/forum?id=XB3iY2q9Vb}
 }
 ```
 
