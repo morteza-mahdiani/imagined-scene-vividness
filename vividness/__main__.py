@@ -249,6 +249,12 @@ def command_controls(args: argparse.Namespace) -> None:
     plt.close(figure)
 
 
+def _command_train(args: argparse.Namespace) -> None:
+    from vividness.train import train_probe
+
+    train_probe(args)
+
+
 def _trials(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--trials", type=Path, required=True)
     parser.add_argument("--participant-column", default="participant")
@@ -297,6 +303,28 @@ def main() -> None:
     controls.add_argument("--n-boot", type=int, default=1000)
     controls.add_argument("--seed", type=int, default=42)
     controls.set_defaults(func=command_controls)
+
+    train = commands.add_parser("train")
+    train.add_argument("--table", type=Path)
+    train.add_argument("--model")
+    train.add_argument("--out", type=Path)
+    train.add_argument("--id-column", default="image_id")
+    train.add_argument("--target-column", default="target")
+    train.add_argument("--path-column", default="image")
+    train.add_argument("--image-root", type=Path, default=None)
+    train.add_argument("--splits", type=Path, default=None)
+    train.add_argument("--epochs", type=int, default=3)
+    train.add_argument("--patience", type=int, default=2)
+    train.add_argument("--batch-size", type=int, default=32)
+    train.add_argument("--lr", type=float, default=1e-3)
+    train.add_argument("--hidden", type=int, default=256)
+    train.add_argument("--dropout", type=float, default=0.0)
+    train.add_argument("--val-frac", type=float, default=0.1)
+    train.add_argument("--test-frac", type=float, default=0.1)
+    train.add_argument("--workers", type=int, default=0)
+    train.add_argument("--seed", type=int, default=42)
+    train.add_argument("--list-models", action="store_true")
+    train.set_defaults(func=_command_train)
 
     args = parser.parse_args()
     args.func(args)

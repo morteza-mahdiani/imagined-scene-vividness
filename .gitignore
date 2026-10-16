@@ -5,6 +5,7 @@ venv/
 .vscode/
 .idea/
 results/
+*.pt
 .env
 .env.*
 *.pem

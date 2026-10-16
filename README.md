@@ -14,7 +14,28 @@ Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin
   <img src="video/spotlight.gif" width="720" alt="Modeling the Vividness of Imagined Natural Scenes">
 </p>
 
-The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. Frozen encoders with a lightweight probe predict the image-level target. The leading component of those predictions is the model-common signal. This repository recomputes that result from the study tables: the shared component, the model correlations, the split-half bound, and the variance each model adds over control features.
+The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. A frozen encoder with a two-layer probe predicts the image-level target. The leading component of those predictions is the model-common signal. This repository trains that probe and recomputes the shared component, the model correlations, the split-half bound, and the variance each model adds over control features.
+
+## Models
+
+Pearson *r* on the shared test images. Intervals are 95% bootstrap intervals from 10,000 resamples.
+
+| Rank | Model | Pearson *r* | 95% interval |
+| --- | --- | ---: | --- |
+| 1 | SigLIP2-B/16 | 0.376 | 0.355, 0.396 |
+| 2 | SigLIP-B/16 | 0.368 | 0.347, 0.388 |
+| 3 | CLIP-B/16 | 0.356 | 0.335, 0.376 |
+| 4 | MAE-B/16 | 0.341 | 0.320, 0.362 |
+| 5 | DINOv3-B | 0.339 | 0.318, 0.360 |
+| 6 | ResNet-50 | 0.330 | 0.309, 0.351 |
+| 7 | DINOv3-L | 0.323 | 0.302, 0.344 |
+| 8 | ResNet-18 | 0.321 | 0.300, 0.342 |
+| 9 | Qwen2-VL 2B | 0.320 | 0.299, 0.341 |
+| 10 | VGG-16 | 0.316 | 0.295, 0.338 |
+| 11 | ViT-B/16 | 0.316 | 0.294, 0.338 |
+| 12 | DINOv2-B/14 | 0.309 | 0.288, 0.330 |
+| 13 | ConvNeXt-T | 0.301 | 0.280, 0.323 |
+| 14 | Handcrafted features | 0.094 | 0.071, 0.118 |
 
 ## Run
 
@@ -61,6 +82,21 @@ python -m vividness controls \
 ```
 
 The defaults are 10,000 resamples for the correlations, 1,000 for the other intervals, 50 participant splits, and seed 42. Column names can be set with `--id-column`, `--target-column`, `--participant-column`, `--image-column`, and `--rating-column`.
+
+## Train
+
+The probe is a two-layer MLP with 256 hidden units and a GELU activation. The encoder stays frozen. Training uses AdamW with learning rate 0.001 and weight decay 0.01, mean squared error, and an 80/10/10 image split with seed 42. The defaults are 3 epochs and a patience of 2.
+
+```bash
+pip install -r requirements-train.txt
+python -m vividness train --list-models
+python -m vividness train \
+  --table images.csv \
+  --model siglip2_b16 \
+  --out results/siglip2
+```
+
+`images.csv` has `image_id`, `target`, and `image`. `image` is a file path, or a name under `--image-root`. A `--splits` file can supply `train_idx`, `val_idx`, and `test_idx` as image ids. The run writes `head_best.pt`, `test_metrics.json`, and `test_predictions.csv`. Qwen2-VL and the handcrafted features are reported in the table above and are not part of this trainer.
 
 [Paper](https://openreview.net/pdf?id=XB3iY2q9Vb)
 
