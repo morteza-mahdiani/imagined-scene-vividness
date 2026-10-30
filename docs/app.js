@@ -1,4 +1,11 @@
 const CELLS = {
+  0: {
+    name: "Middle",
+    also: "",
+    color: "#5e5a54",
+    text: "",
+    prefix: "",
+  },
   1: {
     name: "Agreement, high",
     also: "Shared-vivid",
@@ -35,6 +42,9 @@ const titleEl = document.querySelector("#cell-title");
 const copyEl = document.querySelector("#cell-copy");
 const gallery = document.querySelector("#gallery");
 const tip = document.querySelector("#tip");
+const tipImg = tip.querySelector("img");
+const tipName = tip.querySelector("strong");
+const tipMeta = tip.querySelector("span");
 const chips = [...document.querySelectorAll(".chips button")];
 
 let data = null;
@@ -174,7 +184,7 @@ function draw() {
 
 function nearest(mx, my) {
   let best = -1;
-  let bestD = (13 * layout.dpr) ** 2;
+  let bestD = (16 * layout.dpr) ** 2;
   for (let i = 0; i < sx.length; i++) {
     const d = (sx[i] - mx) ** 2 + (sy[i] - my) ** 2;
     if (d < bestD) {
@@ -190,20 +200,37 @@ canvas.addEventListener("mousemove", (event) => {
   const mx = (event.clientX - rect.left) * (canvas.width / rect.width);
   const my = (event.clientY - rect.top) * (canvas.height / rect.height);
   const i = nearest(mx, my);
-  hover = i;
-  if (i >= 0 && data.k[i] !== "0") {
-    const cell = Number(data.k[i]);
-    if (cell !== selected) showCell(cell);
-    const info = CELLS[cell];
-    tip.style.display = "block";
-    tip.style.left = `${event.clientX + 12}px`;
-    tip.style.top = `${event.clientY + 12}px`;
-    tip.innerHTML = `<strong>${info.name}</strong><br>PC1 ${data.x[i].toFixed(2)} · vividness ${data.y[i].toFixed(2)}`;
-  } else {
-    tip.style.display = "none";
+  if (i !== hover) {
+    hover = i;
+    if (i >= 0) {
+      const cell = Number(data.k[i]);
+      const info = CELLS[cell];
+      if (cell && cell !== selected) showCell(cell);
+      const src = `thumbs/${i}.jpg`;
+      if (tipImg.getAttribute("src") !== src) tipImg.src = src;
+      tipName.textContent = info.name;
+      tipName.style.color = info.color;
+      tipMeta.textContent = `PC1 ${data.x[i].toFixed(2)} · vividness ${data.y[i].toFixed(2)}`;
+      tip.style.display = "block";
+    } else {
+      tip.style.display = "none";
+    }
+    draw();
   }
-  draw();
+  if (i >= 0) placeTip(event.clientX, event.clientY);
 });
+
+function placeTip(x, y) {
+  const pad = 16;
+  const tw = tip.offsetWidth || 196;
+  const th = tip.offsetHeight || 230;
+  let left = x + pad;
+  let top = y + pad;
+  if (left + tw > window.innerWidth - 8) left = x - tw - pad;
+  if (top + th > window.innerHeight - 8) top = Math.max(8, y - th - pad);
+  tip.style.left = `${left}px`;
+  tip.style.top = `${top}px`;
+}
 
 canvas.addEventListener("mouseleave", () => {
   hover = -1;

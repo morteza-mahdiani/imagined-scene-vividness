@@ -37,7 +37,7 @@
 
     <section class="wrap" id="figure">
       <h2>Where models and humans agree</h2>
-      <p class="lede">Each point is one of the 7,300 test images. The horizontal axis is the shared component of 14 model predictions. The vertical axis is the human vividness rating. Dashed lines mark the 30th and 70th percentile of each axis. Hover a colored point, or choose a cell, to see the example images from that corner.</p>
+      <p class="lede">Each point is one of the 7,300 test images. The horizontal axis is the shared component of 14 model predictions. The vertical axis is the human vividness rating. Dashed lines mark the 30th and 70th percentile of each axis. Hover a point to see that image.</p>
       <div class="stage">
         <div class="plot-row">
           <canvas id="scatter" width="800" height="620" aria-label="Scatter plot of human vividness against the shared model component"></canvas>
@@ -72,7 +72,7 @@
   <footer class="wrap">
     <p>Example images are COCO photographs from the Natural Scenes Dataset, the same corners shown in the paper. Analysis code is in this repository.</p>
   </footer>
-  <div class="tip" id="tip"></div>
+  <div class="tip" id="tip"><img alt="" width="180" height="180"><strong></strong><span></span></div>
   <script src="app.js"></script>
 </body>
 </html>

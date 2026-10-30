@@ -164,14 +164,28 @@ canvas {
   pointer-events: none;
   background: white;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 6px 8px;
+  border-radius: 12px;
+  padding: 8px;
   font-size: 13px;
   color: var(--ink);
-  box-shadow: 0 8px 24px rgba(40, 30, 10, 0.08);
+  box-shadow: 0 14px 36px rgba(40, 30, 10, 0.16);
   display: none;
   z-index: 5;
+  width: 196px;
 }
+
+.tip img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #efece6;
+}
+
+.tip strong { display: block; margin: 8px 2px 0; }
+
+.tip span { display: block; margin: 0 2px 2px; color: var(--muted); font-size: 12px; }
 
 footer {
   padding: 28px 0 56px;
