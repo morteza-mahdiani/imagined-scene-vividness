@@ -1,19 +1,21 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite the paper."
 type: software
-title: "imagined-scene-vividness"
+title: "VividChord"
 authors:
   - family-names: Mahdiani
     given-names: Morteza
     email: m72.morteza@gmail.com
 repository-code: "https://github.com/morteza-mahdiani/imagined-scene-vividness"
 abstract: >-
-  Analysis code for the NeurIPS 2026 Spotlight paper Modeling the Vividness
-  of Imagined Natural Scenes Reveals a Model-Common Image-Level Component
-  in Vision Models.
+  VividChord. The visual features associated with vivid mental images remain
+  poorly understood. Lightweight MLP readouts on frozen vision models predict
+  average imagery-vividness ratings for the Natural Scenes Dataset. The best
+  model reaches r = 0.376, about 95% of the image-level reliability ceiling,
+  and a shared component of 14 models reaches r = 0.378.
 preferred-citation:
   type: conference-paper
-  title: "Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models"
+  title: "VividChord: A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes"
   authors:
     - family-names: Mahdiani
       given-names: Morteza

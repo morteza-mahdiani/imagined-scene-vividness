@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modeling the Vividness of Imagined Natural Scenes</title>
-  <meta name="description" content="Project page for the NeurIPS 2026 paper on image-level vividness and the shared component of vision-model predictions.">
+  <title>VividChord</title>
+  <meta name="description" content="VividChord: a shared image-level component across vision models predicts the vividness of imagined natural scenes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body>
   <header class="wrap">
     <p class="venue">NeurIPS 2026 · Spotlight</p>
-    <h1>Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models</h1>
+    <h1><span class="mark">VividChord:</span> A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes</h1>
     <p class="authors">
       <span>Morteza Mahdiani</span> ·
       <span>Catherine Landry</span> ·
@@ -32,7 +32,7 @@
   <main>
     <section class="wrap">
       <h2>Abstract</h2>
-      <p>The visual features that support vivid mental images remain poorly understood. We collected more than 229,000 vividness judgments for the 73,000 images in the Natural Scenes Dataset from 1,991 participants. On each trial, a participant viewed two images, was cued to mentally recreate one of them, and rated the vividness of that mental image. Lightweight probes on frozen vision models predict the image-level ratings above a low-level baseline. The best individual model reaches r = 0.376. A single component of the model predictions matches that result, r = 0.378, and accounts for most of the agreement among models. The same component is only partly about vividness: it also tracks image memorability, and it misses a reliable pattern in which humans and models disagree.</p>
+      <p>The visual features associated with vivid mental images remain poorly understood. We collected more than 229,000 vividness judgments for the 73,000 images in the Natural Scenes Dataset in a large online experiment with 1,991 participants. We then trained lightweight MLP readouts on frozen vision-model representations to predict average imagery-vividness ratings from image content. The best individual model reached <em>r</em> = 0.376 [0.355, 0.396], approximately 95% of the estimated image-level reliability ceiling (<em>r</em> ≈ 0.395). A principal-component analysis of predictions from 14 models identified a shared image-property component that explained 72.3% of cross-model prediction variance and correlated with the measured target at <em>r</em> = 0.378. The best tested predictor of variation remaining after this component reached <em>r</em> = 0.077, approximately 39% of the corresponding residual-target ceiling (<em>r</em> ≈ 0.200). Position, distractor, low-level, caption-derived, coarse-category, memorability, and participant-level analyses constrain the interpretation of this performance. Average vividness ratings are strongly predictable from image content relative to the reliability of the measured image-level target. However, much of the predictable signal is shared across model families and appears to reflect general image properties, while reliable variation remains beyond this shared component. The results therefore establish a robust association between visual content and average vividness ratings, without implying that the models explain the subjective experience of mental imagery; the observer-specific processes that contribute to this experience remain open.</p>
     </section>
 
     <section class="wrap" id="figure">
@@ -59,8 +59,8 @@
 
     <section class="wrap" id="cite">
       <h2>Citation</h2>
-      <pre>@inproceedings{mahdiani2026modeling,
-  title={Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models},
+      <pre>@inproceedings{mahdiani2026vividchord,
+  title={VividChord: A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes},
   author={Mahdiani, Morteza and Landry, Catherine and van den Bosch, Jasper JF and Gosselin, Fr{\'e}d{\'e}ric and Charest, Ian},
   booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
   year={2026},

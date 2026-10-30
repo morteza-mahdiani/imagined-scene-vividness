@@ -1,4 +1,4 @@
-<h1 align="center">Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models</h1>
+<h1 align="center">VividChord: A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes</h1>
 
 <p align="center">
 Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin, and Ian Charest
@@ -12,10 +12,14 @@ Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin
 </p>
 
 <p align="center">
-  <img src="video/spotlight.gif" width="720" alt="Modeling the Vividness of Imagined Natural Scenes">
+  <img src="video/spotlight.gif" width="720" alt="VividChord">
 </p>
 
-The paper measures how vividly people can imagine a natural scene, and how much of that image-level pattern is shared by current vision models. A frozen encoder with a two-layer probe predicts the image-level target. The leading component of those predictions is the model-common signal. This repository trains that probe and recomputes the shared component, the model correlations, the split-half bound, and the variance each model adds over control features.
+## Abstract
+
+The visual features associated with vivid mental images remain poorly understood. We collected more than 229,000 vividness judgments for the 73,000 images in the Natural Scenes Dataset in a large online experiment with 1,991 participants. We then trained lightweight MLP readouts on frozen vision-model representations to predict average imagery-vividness ratings from image content. The best individual model reached *r* = 0.376 [0.355, 0.396], approximately 95% of the estimated image-level reliability ceiling (*r* ≈ 0.395). A principal-component analysis of predictions from 14 models identified a shared image-property component that explained 72.3% of cross-model prediction variance and correlated with the measured target at *r* = 0.378. The best tested predictor of variation remaining after this component reached *r* = 0.077, approximately 39% of the corresponding residual-target ceiling (*r* ≈ 0.200). Position, distractor, low-level, caption-derived, coarse-category, memorability, and participant-level analyses constrain the interpretation of this performance. Average vividness ratings are strongly predictable from image content relative to the reliability of the measured image-level target. However, much of the predictable signal is shared across model families and appears to reflect general image properties, while reliable variation remains beyond this shared component. The results therefore establish a robust association between visual content and average vividness ratings, without implying that the models explain the subjective experience of mental imagery; the observer-specific processes that contribute to this experience remain open.
+
+This repository trains the frozen-encoder probe and recomputes the shared component, the model correlations, the split-half bound, and the variance each model adds over control features.
 
 ## Models
 
@@ -104,8 +108,8 @@ python -m vividness train \
 ## Citation
 
 ```bibtex
-@inproceedings{mahdiani2026modeling,
-  title={Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models},
+@inproceedings{mahdiani2026vividchord,
+  title={VividChord: A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes},
   author={Mahdiani, Morteza and Landry, Catherine and van den Bosch, Jasper JF and Gosselin, Fr{\'e}d{\'e}ric and Charest, Ian},
   booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
   year={2026},
