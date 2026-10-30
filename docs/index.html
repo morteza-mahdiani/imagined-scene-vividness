@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modeling the Vividness of Imagined Natural Scenes</title>
+  <meta name="description" content="Project page for the NeurIPS 2026 paper on image-level vividness and the shared component of vision-model predictions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="wrap">
+    <p class="venue">NeurIPS 2026 · Spotlight</p>
+    <h1>Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models</h1>
+    <p class="authors">
+      <span>Morteza Mahdiani</span> ·
+      <span>Catherine Landry</span> ·
+      <span>Jasper JF van den Bosch</span> ·
+      <span>Frédéric Gosselin</span> ·
+      <span>Ian Charest</span>
+    </p>
+    <div class="actions">
+      <a href="https://openreview.net/pdf?id=XB3iY2q9Vb">Paper</a>
+      <a href="https://openreview.net/forum?id=XB3iY2q9Vb">OpenReview</a>
+      <a href="https://github.com/morteza-mahdiani/imagined-scene-vividness">Code</a>
+      <a href="#cite">Cite</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap">
+      <h2>Abstract</h2>
+      <p>The visual features that support vivid mental images remain poorly understood. We collected more than 229,000 vividness judgments for the 73,000 images in the Natural Scenes Dataset from 1,991 participants. On each trial, a participant viewed two images, was cued to mentally recreate one of them, and rated the vividness of that mental image. Lightweight probes on frozen vision models predict the image-level ratings above a low-level baseline. The best individual model reaches r = 0.376. A single component of the model predictions matches that result, r = 0.378, and accounts for most of the agreement among models. The same component is only partly about vividness: it also tracks image memorability, and it misses a reliable pattern in which humans and models disagree.</p>
+    </section>
+
+    <section class="wrap" id="figure">
+      <h2>Where models and humans agree</h2>
+      <p class="lede">Each point is one of the 7,300 test images. The horizontal axis is the shared component of 14 model predictions. The vertical axis is the human vividness rating. Dashed lines mark the 30th and 70th percentile of each axis. Hover a colored point, or choose a cell, to see the example images from that corner.</p>
+      <div class="stage">
+        <div class="plot-row">
+          <canvas id="scatter" width="800" height="620" aria-label="Scatter plot of human vividness against the shared model component"></canvas>
+          <div class="side">
+            <div class="chips">
+              <button type="button" data-cell="1">Agreement, high</button>
+              <button type="button" data-cell="2">Agreement, low</button>
+              <button type="button" data-cell="3" aria-pressed="true">Underpredicted</button>
+              <button type="button" data-cell="4">Overpredicted</button>
+            </div>
+            <h3 id="cell-title">Underpredicted</h3>
+            <p id="cell-copy"></p>
+            <div class="gallery" id="gallery"></div>
+          </div>
+        </div>
+        <p class="caption">Images are partitioned by independent top and bottom 30% thresholds on human vividness and on the sign-aligned shared component (r = 0.378). Agreement cells are where that component matches the human rating. Disagreement cells are the underprediction of human-high indoor and structured scenes, and the overprediction of visually salient single-subject images.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="cite">
+      <h2>Citation</h2>
+      <pre>@inproceedings{mahdiani2026modeling,
+  title={Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models},
+  author={Mahdiani, Morteza and Landry, Catherine and van den Bosch, Jasper JF and Gosselin, Fr{\'e}d{\'e}ric and Charest, Ian},
+  booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
+  year={2026},
+  url={https://openreview.net/pdf?id=XB3iY2q9Vb}
+}</pre>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Example images are COCO photographs from the Natural Scenes Dataset, the same corners shown in the paper. Analysis code is in this repository.</p>
+  </footer>
+  <div class="tip" id="tip"></div>
+  <script src="app.js"></script>
+</body>
+</html>

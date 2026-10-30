@@ -8,6 +8,7 @@ Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin
   <a href="https://openreview.net/pdf?id=XB3iY2q9Vb"><img alt="Paper" src="https://img.shields.io/badge/Paper-OpenReview-b31b1b?logo=adobeacrobatreader&logoColor=white"></a>
   <a href="https://openreview.net/pdf?id=XB3iY2q9Vb"><img alt="NeurIPS 2026 Spotlight" src="https://img.shields.io/badge/NeurIPS-2026_Spotlight-blue"></a>
   <a href="https://github.com/morteza-mahdiani/imagined-scene-vividness"><img alt="Code" src="https://img.shields.io/badge/Code-GitHub-181717?logo=github&logoColor=white"></a>
+  <a href="https://morteza-mahdiani.github.io/imagined-scene-vividness/"><img alt="Project page" src="https://img.shields.io/badge/Project-page-2f6f62"></a>
 </p>
 
 <p align="center">
