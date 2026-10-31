@@ -1,4 +1,4 @@
-<h1 align="center">VividChord: A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes</h1>
+<h1 align="center">Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models</h1>
 
 <p align="center">
 Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin, and Ian Charest
@@ -12,7 +12,7 @@ Morteza Mahdiani, Catherine Landry, Jasper JF van den Bosch, Frédéric Gosselin
 </p>
 
 <p align="center">
-  <img src="video/spotlight.gif" width="720" alt="VividChord">
+  <img src="video/spotlight.gif" width="720" alt="Modeling the Vividness of Imagined Natural Scenes">
 </p>
 
 ## Abstract
@@ -108,8 +108,8 @@ python -m vividness train \
 ## Citation
 
 ```bibtex
-@inproceedings{mahdiani2026vividchord,
-  title={VividChord: A Shared Image-Level Component Across Vision Models Predicts the Vividness of Imagined Natural Scenes},
+@inproceedings{mahdiani2026modeling,
+  title={Modeling the Vividness of Imagined Natural Scenes Reveals a Model-Common Image-Level Component in Vision Models},
   author={Mahdiani, Morteza and Landry, Catherine and van den Bosch, Jasper JF and Gosselin, Fr{\'e}d{\'e}ric and Charest, Ian},
   booktitle={The Fortieth Annual Conference on Neural Information Processing Systems},
   year={2026},
